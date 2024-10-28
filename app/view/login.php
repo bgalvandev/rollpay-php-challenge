@@ -8,20 +8,23 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Iniciar Sesión</h2>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Iniciar Sesión</h2>
+            <a href="<?= $basePath ?>/register" class="btn btn-secondary">Registrar</a>
+        </div>
         <?php if (isset($_GET['error'])): ?>
             <div class="alert alert-danger" role="alert">
                 Credenciales incorrectas. Inténtalo de nuevo.
             </div>
         <?php endif; ?>
-        <form action="/login" method="post">
+        <form action="<?= $basePath ?>/login" method="post">
             <div class="form-group">
                 <label for="username">Nombre de Usuario</label>
-                <input type="text" class="form-control" id="username" name="username" required>
+                <input type="text" class="form-control" id="username" name="username" >
             </div>
             <div class="form-group">
                 <label for="password">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password" >
             </div>
             <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
         </form>

@@ -8,9 +8,9 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Bienvenido!</h2>
+        <h2>Bienvenido, <?= htmlspecialchars($_SESSION['username'] ?? 'Usuario') ?>!</h2>
         <p>Has iniciado sesión correctamente.</p>
-        <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+        <a href="<?= $basePath ?>/logout" class="btn btn-danger">Cerrar Sesión</a>
     </div>
 </body>
 </html>

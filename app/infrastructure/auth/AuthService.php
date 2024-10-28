@@ -17,29 +17,27 @@ class AuthService {
     }
 
     public function login(string $username, string $password): ?string {
-        // Verificar usuario y contraseña
         $user = $this->userRepository->findUserByUsername($username);
 
-        if ($user && password_verify($password, $user['password'])) {
-            // Si el login es exitoso, registrar la auditoría
+        if ($user && password_verify($password, $user->getPassword())) {
             $this->auditRepository->recordLogin($username, true);
-
-            // Generar el JWT
+            
+            // Generación del JWT
             $header = ['alg' => 'HS256', 'typ' => 'JWT'];
             $payload = [
-                'sub' => $user['id'],
+                'sub' => $user->getId(),
                 'iat' => time(),
-                'exp' => time() + 3600 // 1 hora de expiración
+                'exp' => time() + 3600 // Expira en 1 hora
             ];
-            return \App\Infrastructure\Auth\generateJwt($header, $payload, $this->secret);
+            
+            return generateJwt($header, $payload, $this->secret);
         } else {
-            // Si el login falla, registrar la auditoría
             $this->auditRepository->recordLogin($username, false);
             return null;
         }
     }
 
     public function validateToken(string $token): ?array {
-        return \App\Infrastructure\Auth\verifyJwt($token, $this->secret);
+        return verifyJwt($token, $this->secret);
     }
 }

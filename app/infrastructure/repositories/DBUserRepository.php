@@ -18,7 +18,7 @@ class DBUserRepository implements UserRepository {
         $stmt->execute(['username' => $username]);
         $data = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        return $data ? new User($data['id'], $data['username'], $data['password'], $data['email']) : null;
+        return $data ? new User($data['username'], $data['password'], $data['email'], (int)$data['id']) : null;
     }
 
     public function saveUser(User $user): bool {

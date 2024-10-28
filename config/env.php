@@ -9,5 +9,5 @@ return [
     'DB_USER' => getenv('DB_USER') ?: 'root',
     'DB_PASS' => getenv('DB_PASSWORD') ?: '',
     
-    'TOKEN_SECRET' => getenv('TOKEN_SECRET') ?: '1234567890',
+    'TOKEN_SECRET' => getenv('SECRET_KEY') ?: '1234567890',
 ];
