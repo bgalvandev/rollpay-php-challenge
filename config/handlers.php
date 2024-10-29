@@ -6,7 +6,7 @@ use App\Domain\Models\User;
 
 function handleIndex(AuthService $authService, string $basePath): void {
     if (isset($_SESSION['token']) && $authService->validateToken($_SESSION['token'])) {
-        require __DIR__ . '/../app/view/index.php';
+        require __DIR__ . '/../app/view/home/index.php';
     } else {
         header('Location: ' . $basePath . '/login');
         exit;
@@ -38,7 +38,7 @@ function handleLogin(AuthService $authService, string $basePath): void {
             exit;
         }
     } else {
-        require __DIR__ . '/../app/view/login.php';
+        require __DIR__ . '/../app/view/login/login.php';
     }
 }
 
@@ -64,7 +64,7 @@ function handleRegister(DBUserRepository $userRepository, string $basePath): voi
         }
         exit;
     } else {
-        require __DIR__ . '/../app/view/register.php';
+        require __DIR__ . '/../app/view/login/register.php';
     }
 }
 
